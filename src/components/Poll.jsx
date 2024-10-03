@@ -1,4 +1,5 @@
 import { useState } from "react";
+import radioButton from "../assets/radio-button.svg";
 
 const SEND_ERROR_MESSAGE = "You need to chose something!"
 
@@ -30,14 +31,22 @@ function Poll({ id, name, options, updatePoll }) {
 
   const viewTemplate = (op) => (
     <div className="pc-option" key={op.id} onClick={() => handleFocusChange(op.id)}>
-      <input 
-        type="radio" 
-        id={id + op.id} 
-        name={`poll-${id}`} 
-        value={op.value} 
-        checked={focus === op.id}
-      />
-      <label className="pc-option-desc radio-el" htmlFor={id + op.id}>{op.value}</label>
+      <label className="pc-option-desc radio-el" htmlFor={id + op.id}>
+        <input 
+          type="radio" 
+          id={id + op.id} 
+          name={`poll-${id}`} 
+          value={op.value} 
+          checked={focus === op.id}
+        />
+        <svg className="radio-button unchecked-rb">
+          <use href={`${radioButton}#unchecked`}></use>
+        </svg>
+        <svg className="radio-button checked-rb">
+          <use href={`${radioButton}#checked`}></use>
+        </svg>
+        {op.value}
+      </label>
     </div>
   );
 

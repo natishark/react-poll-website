@@ -12,6 +12,8 @@
   font-weight: 100;
   font-style: normal;
   letter-spacing: 1px;
+  padding: 0;
+  margin: 0;
 }
 
 ul {
@@ -149,24 +151,32 @@ h1, h2 {
   padding-left: 1.4em;
 }
 
-.radio-el:before {
-  content: "";
-  display: inline-block;
+.radio-button {
   height: 1em;
   width: 1em;
   position: absolute;
   left: 0;
-  background-image: url(./assets/radio-unchecked.svg);
-  background-size: 1em 1em;
 }
+
+.checked-rb {
+  opacity: 0;
+}
+
+.radio-el:hover > .checked-rb {
+  opacity: 1;
+}
+
+.radio-el > input:checked ~ .checked-rb {
+  opacity: 1;
+} 
+
+.radio-el > input:checked ~ .unchecked-rb {
+  opacity: 0;
+} 
 
 .pc-option-res {
   display: flex;
   column-gap: 0.8em;
-}
-
-.pc-option input[type=radio]:checked + .pc-option-desc:before {
-  background-image: url(./assets/radio-checked.svg);
 }
 
 .pc-btn-group {
