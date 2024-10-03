@@ -123,7 +123,7 @@ function CreatePoll() {
             type="button" 
             className="ui-button dangerous"
             onClick={() => navigate("/")}>
-            Cancele
+            Cancel
           </button>
         </div>
       </main>
