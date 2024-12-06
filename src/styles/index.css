@@ -226,7 +226,7 @@ h1, h2 {
 }
 
 .del-poll-op-btn {
-  background: url(./assets/delete-icon.svg);
+  background: url(../assets/delete-icon.svg);
   background-size: contain;
   height: 2.2em;
   width: 2.2em;

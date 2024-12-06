@@ -1,7 +1,7 @@
 import { useState } from "react";
 import radioButton from "../assets/radio-button.svg";
 
-const SEND_ERROR_MESSAGE = "You need to chose something!"
+const SEND_ERROR_MESSAGE = "You need to choose something!"
 
 function Poll({ id, name, options, updatePoll }) {
   const [isResults, setResults] = useState(false);
