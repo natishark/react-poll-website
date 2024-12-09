@@ -58,10 +58,10 @@ function Home() {
       <Header />
       <main className="main">
         {pollElements}
+        <PageNavigation
+          current={pageNumber}
+          total={Math.ceil(pollList.length / POLL_PER_PAGE)} />
       </main>
-      <PageNavigation
-        current={pageNumber}
-        total={Math.ceil(pollList.length / POLL_PER_PAGE)} />
     </>
   );
 }

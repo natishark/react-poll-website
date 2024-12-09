@@ -3,10 +3,20 @@ import '../styles/page-navigation.css';
 
 function PageNavigation({current, total}) {
   return (
-    <nav>
-      {current > 1 && <Link to={`/${current - 1}`}>{'<'}</Link>}
+    <nav className="page-navigation navigation header-line">
+      {current > 1 && 
+        <Link 
+          to={`/${current - 1}`} 
+          className="page-nav-link">
+          {'<'}
+        </Link>}
       {generateElements(current, total)}
-      {current < total && <Link to={`/${current + 1}`}>{'>'}</Link>}
+      {current < total && 
+        <Link 
+          to={`/${current + 1}`} 
+          className="page-nav-link">
+          {'>'}
+        </Link>}
     </nav>
   );
 }
@@ -29,7 +39,7 @@ function generateElements(current, total) {
       <Link
         to={`/${num}`}
         key={elementIndex++}
-        className={`page-number ${getActivePageClass(current === num)}`}>
+        className={`page-nav-link ${getActivePageClass(current === num)}`}>
         {num}
       </Link>
     );

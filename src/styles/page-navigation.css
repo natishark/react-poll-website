@@ -1,6 +1,33 @@
-.active-page {
-  text-decoration: none;
-  pointer-events: none;
-  background-color: antiquewhite;
+:root {
+  --primary-color: #7143bb;
+  --primary-light-color: #d5cde1;
+}
 
+.page-navigation {
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 0 2rem 1.4rem;
+  padding: 0;
+  column-gap: 0.2rem;
+  row-gap: 0.2rem;
+}
+
+.page-nav-link {
+  text-decoration: none;
+
+  padding: 0.06rem 0.3rem;
+
+  background-color: var(--primary-light-color);
+  color: #1d1031;
+
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.page-nav-link.active-page {
+  pointer-events: none;
+  
+  background-color: var(--primary-color);
+  color: var(--primary-light-color);
 }

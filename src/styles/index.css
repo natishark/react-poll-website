@@ -2,6 +2,7 @@
   --primary-color: #7143bb;
   --secondary-color: #a382d7;
   --main-shadow-color: #3e226c;
+  --primary-light-color: #d5cde1;
 }
 
 *,
@@ -105,7 +106,7 @@ h1, h2 {
 .poll-card {
   padding: 1rem;
   margin: 2rem;
-  background-color: #d5cde1;
+  background-color: var(--primary-light-color);
   border-radius: 18px;
   box-shadow: 2px 2px 3px var(--main-shadow-color), inset 1px 1px 14px white;
 }
@@ -245,7 +246,7 @@ h1, h2 {
 
 .create-main {
   padding: 1em 2em;
-  background-color: #d5cde1;
+  background-color: var(--primary-light-color);
 }
 
 textarea {

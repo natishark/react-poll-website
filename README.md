@@ -17,7 +17,8 @@ React-based SPA designed to allow you to take part in polls posted by users.
 - Users support
 - Confirmation on cancel poll creation
 - Poll tags and tag-based filters
-- Multiple pages for viewing all polls (partially done: no styling)
+- Multiple pages for viewing all polls (Done✅)
 - Errors while creating a poll
+- Fix: add 404 not found page
 
 Server side implements elsewhere (no).
