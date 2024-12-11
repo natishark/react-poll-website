@@ -103,12 +103,38 @@ h1, h2 {
   text-shadow: 0 0 11px var(--secondary-color);
 }
 
-.poll-card {
+.poll-card,
+.modal-dialog {
   padding: 1rem;
   margin: 2rem;
   background-color: var(--primary-light-color);
   border-radius: 18px;
   box-shadow: 2px 2px 3px var(--main-shadow-color), inset 1px 1px 14px white;
+}
+
+.modal-dialog {
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+}
+
+.modal-dialog > * {
+  padding: 0 1rem;
+}
+
+.modal-dialog > *:first-child {
+  padding-top: 1rem;
+}
+
+.modal-dialog > *:last-child {
+  padding-bottom: 1rem;
+}
+
+.modal-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .main-section-title {
@@ -180,7 +206,7 @@ h1, h2 {
   column-gap: 0.8em;
 }
 
-.pc-btn-group {
+.btn-group {
   display: flex;
   justify-content: center;
   column-gap: 1em;

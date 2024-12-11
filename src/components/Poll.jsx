@@ -95,7 +95,7 @@ function Poll({ id, name, options, updatePoll }) {
       <fieldset className="pc-options">
         {optionList}
       </fieldset>
-      <div className="pc-btn-group">
+      <div className="btn-group">
         <button 
           type="button" 
           className="ui-button encourage"

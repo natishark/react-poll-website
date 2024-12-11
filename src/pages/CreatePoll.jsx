@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import Header from "../components/Header";
+import ConfirmCancelModal from "../components/ConfirmCancelModal";
 
 function CreatePoll() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ function CreatePoll() {
       { id: 2, num: 2, value: "" }
     ]
   });
+  const [modalState, setModalState] = useState(null);
 
   function handlePollCreation() {
     const request = {
@@ -33,6 +35,10 @@ function CreatePoll() {
       ]
     });
     navigate("/");
+  }
+
+  function handleModalClosing() {
+    setModalState(null);
   }
 
   function addOption() {
@@ -85,7 +91,6 @@ function CreatePoll() {
     }
   }
 
-
   return (
     <>
       <Header />
@@ -112,21 +117,35 @@ function CreatePoll() {
             <span className="hidden-content"> new option</span>
           </button>
         </div>
-        <div className="create-btn-group pc-btn-group">
+        <div className="create-btn-group btn-group">
           <button 
             type="button" 
             className="ui-button encourage"
-            onClick={handlePollCreation}>
+            onClick={() => setModalState("create")}>
             Create!
           </button>
           <button 
             type="button" 
             className="ui-button dangerous"
-            onClick={() => navigate("/")}>
+            onClick={() => setModalState("cancel")}>
             Cancel
           </button>
         </div>
       </main>
+      <ConfirmCancelModal 
+        isOpen={modalState === "create"}
+        message="Create this poll?"
+        focusOnConfirm={true}
+        onConfirm={handlePollCreation}
+        onCancel={handleModalClosing}
+      />
+      <ConfirmCancelModal 
+        isOpen={modalState === "cancel"}
+        message="Abort creation? What is written will be lost."
+        focusOnConfirm={false}
+        onConfirm={() => navigate("/")}
+        onCancel={handleModalClosing}
+      />
     </>
   );
 }
