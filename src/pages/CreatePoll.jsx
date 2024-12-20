@@ -1,25 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { nanoid } from "nanoid";
+
+import { Poll } from "../utils/poll/poll";
 import Header from "../components/Header";
 import ConfirmCancelModal from "../components/ConfirmCancelModal";
 
 function CreatePoll() {
   const navigate = useNavigate();
-  const [poll, setPoll] = useState({
-    question: "",
-    options: [
-      { id: 1, num: 1, value: "" },
-      { id: 2, num: 2, value: "" }
-    ]
-  });
+  const [poll, setPoll] = useState(Poll.empty());
   const [modalState, setModalState] = useState(null);
 
   function handlePollCreation() {
     const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...poll, id: nanoid() })
+      body: JSON.stringify(poll)
     };
 
     fetch("/new-poll", request)
@@ -27,13 +22,7 @@ function CreatePoll() {
       .then(response => console.log(response))
       .catch(e => console.log(e));
     
-    setPoll({
-      question: "",
-      options: [
-        { id: 1, num: 1, value: "" },
-        { id: 2, num: 2, value: "" }
-      ]
-    });
+    setPoll(Poll.empty());
     navigate("/");
   }
 
@@ -41,27 +30,27 @@ function CreatePoll() {
     setModalState(null);
   }
 
+  function handleAbortCreation() {
+    if (poll.isEmpty()) {
+      navigate("/")
+    } else {
+      setModalState("cancel")
+    }
+  }
+
   function addOption() {
-    const newNum = poll.options.length + 1;
-    setPoll({ ...poll, options: [ ...poll.options, { id: nanoid(), num: newNum, value: "" } ] });
+    setPoll(poll.addOption());
   }
 
   function removeOption(id) {
-    let newOptions = [];
-    let curNum = 1;
-    for (const op of poll.options) {
-      if (op.id !== id) {
-        newOptions.push({ ...op, num: curNum++ });
-      }
-    }
-    setPoll({ ...poll, options: newOptions });
+    setPoll(poll.removeOption(id));
   }
 
   const optionList = poll.options.map(option =>  (
       <li className="create-ans-option" key={option.id}>
         <textarea 
-          placeholder={`Option ${option.num}`} 
-          id={`option-${option.num}`} 
+          placeholder={`Option ${option.num + 1}`}
+          id={option.id} 
           required
           value={option.value}
           onChange={handleChange} 
@@ -79,21 +68,15 @@ function CreatePoll() {
   function handleChange(event) {
     event.preventDefault();
     if (event.target.id === "ques") {
-      setPoll({ ...poll, question: event.target.value });
+      setPoll(poll.updateQuestion(event.target.value));
     } else {
-      poll.options[event.target.id.split("-")[1] - 1].value = event.target.value;
-      setPoll({ ...poll, options: poll.options.map(op => {
-        if (op.num === event.target.id.split("-")[1]) {
-          return { ...op, value: event.target.value };
-        }
-        return op;
-      })});
+      setPoll(poll.updateOption(event.target.id, event.target.value));
     }
   }
 
   return (
     <>
-      <Header />
+      <Header onPollsNavigate={handleAbortCreation}/>
       <main className="create-main main">
         <div className="question-input">
           <h2 className="main-section-title">Question</h2>
@@ -101,6 +84,7 @@ function CreatePoll() {
             className="ques-input" 
             name="question" 
             id="ques" 
+            placeholder="Type your question here..." 
             required 
             value={poll.question}
             onChange={handleChange}
@@ -127,7 +111,7 @@ function CreatePoll() {
           <button 
             type="button" 
             className="ui-button dangerous"
-            onClick={() => setModalState("cancel")}>
+            onClick={handleAbortCreation}>
             Cancel
           </button>
         </div>

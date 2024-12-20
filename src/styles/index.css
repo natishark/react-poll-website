@@ -103,6 +103,11 @@ h1, h2 {
   font-size: 1.1em;
   font-weight: 600;
   letter-spacing: 0;
+
+  background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 .nav-link:focus,

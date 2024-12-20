@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import PageNavigation from "../components/PageNavigation";
 import Poll from "../components/Poll";
 
-import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 

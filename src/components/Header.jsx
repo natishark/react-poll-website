@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/vote-logo.svg";
 
-function Header() {
+function Header({onPollsNavigate}) {
   return (
     <header className="main-header">
       <header className="header-line top-lvl-header">
@@ -14,7 +14,10 @@ function Header() {
         <h1 className="site-title">Vote</h1>
       </header>
       <nav className="navigation header-line">
-        <Link to="/" className="nav-link">Polls</Link>
+        {onPollsNavigate
+          ? <button onClick={onPollsNavigate} className="nav-link">Polls</button>
+          : <Link to="/" className="nav-link">Polls</Link>
+        }
         <Link to="/create" className="nav-link">Create Poll</Link>
       </nav>
     </header>
