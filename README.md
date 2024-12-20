@@ -23,5 +23,7 @@ React-based SPA designed to allow you to take part in polls posted by users.
 - Fix: add 404 not found page
 - Mock poll list while loading
 - Implement nice display of votes
+- Make poll options on hpme page tab-visible
+- Remove buttons under poll after voting with !animation
 
 Server side implements elsewhere (no).
